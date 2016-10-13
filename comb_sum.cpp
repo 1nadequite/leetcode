@@ -1,4 +1,4 @@
-// 39. Combination Sum
+// 39. Combination Sum (medium)
 #include <iostream>
 #include <cstdio>
 #include <vector>

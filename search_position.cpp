@@ -1,4 +1,4 @@
-// 35. Search Insert Position
+// 35. Search Insert Position (easy)
 #include <iostream>
 #include <fstream>
 #include <vector>
