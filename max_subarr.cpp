@@ -1,4 +1,4 @@
-// 53. Maximum Subarray
+// 53. Maximum Subarray (medium))
 #include <iostream>
 #include <cstdio>
 #include <string>
