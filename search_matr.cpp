@@ -12,7 +12,8 @@ typedef long long ll;
 
 class Solution {
 public:
-  bool searchMatrix(vector<vector<int>>& matrix, int target) {
+  // O(n + m);
+  bool searchMatrix1(vector<vector<int>>& matrix, int target) {
     if (matrix.empty()) return false;
     int n = matrix.size(), m = matrix[0].size();
     int i = 0, j = m - 1;
@@ -20,6 +21,19 @@ public:
       if (matrix[i][j] == target) return true;
       if (matrix[i][j] > target) j--;
       else i++;
+    }
+    return false;
+  }
+  bool searchMatrix(vector<vector<int>>& matrix, int target) {
+    if (matrix.empty()) return false;
+    int n = matrix.size(), m = matrix[0].size();
+    int l = 0, r = n * m - 1;
+    while (l <= r) {
+      int mid = (l + r) >> 1;
+      int elem = matrix[mid / m][mid % m];
+      if (elem == target) return true;
+      if (elem > target) r = mid - 1;
+      else l = mid + 1;
     }
     return false;
   }
