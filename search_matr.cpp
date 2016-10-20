@@ -24,6 +24,7 @@ public:
     }
     return false;
   }
+  // O(log(n*m))
   bool searchMatrix(vector<vector<int>>& matrix, int target) {
     if (matrix.empty()) return false;
     int n = matrix.size(), m = matrix[0].size();
