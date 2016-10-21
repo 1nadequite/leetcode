@@ -12,18 +12,18 @@ typedef long long ll;
 
 class Solution {
 public:
-  bool bt(int pos, int i, int j, string word, vector<vector<char>>& board) {
+  bool bt(int pos, int i, int j, vector<vector<bool>> u, string word, vector<vector<char>>& board) {
     if (pos >= word.size()) return true;
     int n = board.size(), m = board[0].size();
-    if (i < 0 || i >= n || j < 0 || j >= m)
+    if (i < 0 || i >= n || j < 0 || j >= m || u[i][j])
       return false;
     bool res = false;
     if (board[i][j] == word[pos]) {
-      board[i][j] = '0';
-      if (bt(pos + 1, i - 1, j, word, board) || bt(pos + 1, i + 1, j, word, board) ||
-        bt(pos + 1, i, j - 1, word, board) || bt(pos + 1, i, j + 1, word, board))
+      u[i][j] = true;
+      if (bt(pos + 1, i - 1, j, u, word, board) || bt(pos + 1, i + 1, j, u, word, board) ||
+        bt(pos + 1, i, j - 1, u, word, board) || bt(pos + 1, i, j + 1, u, word, board))
         res = true;
-      board[i][j] = word[pos];
+      u[i][j] = false;
     }
     return res;
   }
@@ -32,10 +32,10 @@ public:
     int n = board.size(), m = board[0].size();
     if (word.size() > n * m) return false;
     if (word.size() == 0) return true;
-
+    vector<vector<bool>> u(n, vector<bool> (m));
     for (int i = 0; i < n; ++i) {
       for (int j = 0; j < m; ++j) {
-        if (bt(0, i, j, word, board)) return true;
+        if (bt(0, i, j, u, word, board)) return true;
       }
     }
     return false;
