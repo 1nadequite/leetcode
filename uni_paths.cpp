@@ -12,7 +12,8 @@ typedef long long ll;
 
 class Solution {
 public:
-  int uniquePaths(int m, int n) {
+  // O(n * m);
+  int uniquePaths1(int m, int n) {
     vector<vector<int>> dp(m + 1, vector<int> (n + 1));
     dp[1][1] = 1;
     for (int i = 1; i <= m; ++i) {
@@ -21,6 +22,14 @@ public:
       }
     }
     return dp[m][n];
+  }
+  // O(n + m)
+  int uniquePaths(int m, int n) {
+    m--; n--;
+    int ans = 1;
+    for (int i = 1; i <= min(m, n); ++i)
+      ans = static_cast<long long>(ans) * (m + n - i + 1) / i;
+    return ans;
   }
 };
 
