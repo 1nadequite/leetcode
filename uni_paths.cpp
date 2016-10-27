@@ -25,11 +25,12 @@ public:
   }
   // O(n + m)
   int uniquePaths(int m, int n) {
-    m--; n--;
-    int ans = 1;
-    for (int i = 1; i <= min(m, n); ++i)
-      ans = static_cast<long long>(ans) * (m + n - i + 1) / i;
-    return ans;
+    long long ans = 1;
+    for (int i = m; i < (m + n - 1); ++i) {
+      ans *= i;
+      ans /= (i - m + 1);
+    }
+    return (int)ans;
   }
 };
 
