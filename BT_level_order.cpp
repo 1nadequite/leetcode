@@ -21,15 +21,19 @@ typedef long long ll;
  */
 class Solution {
 public:
+  int maxHeight(TreeNode *root) {
+    if (!root) return 0;
+    return max(maxHeight(root->left, maxHeight(root->right))) + 1;
+  }
   void levelOrder(TreeNode *root, int lvl, vector<vector<int>>& ans) {
     if (!root) return;
-    if (ans.size() > lvl) ans[lvl].push_back(root->val);
-    else ans.push_back({root->val});
+    ans[lvl].push_back(root->val);
     levelOrder(root->left, lvl + 1, ans);
     levelOrder(root->right, lvl + 1, ans);
   }
   vector<vector<int>> levelOrder(TreeNode* root) {
-    vector<vector<int>> ans;
+    int n = maxHeight(root);
+    vector<vector<int>> ans(n);
     if (!root) return ans;
     levelOrder(root, 0, ans);
     return ans;
